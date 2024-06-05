@@ -1,36 +1,30 @@
 #!/usr/bin/python3
+""" canunlock all function"""
 
 def canUnlockAll(boxes):
-    # set to keep track of visited boxes
-    visited = set()
+    """
+    Determine if all boxes can be opened.
 
-    # queue with the first box
-    queue = [0]
+    Args:
+        boxes (list of list of int): A list of lists representing boxes and their corresponding keys.
 
-    # While there are boxes in the queue
-    while queue:
-        # Get the next box
-        current_box = queue.pop(0)
-        
-        # Mark current box as visited
-        visited.add(current_box)
+    Returns:
+        bool: True if all boxes can be opened, False otherwise.
+    """
+    if not boxes:
+        return False
 
-        # Check all keys in current box
-        for key in boxes[current_box]:
-            # If key opens a new box and that box hasn't been visited yet
-            if key < len(boxes) and key not in visited:
-                # Add the new box to the queue
-                queue.append(key)
+    unlocked = [False] * len(boxes)
+    unlocked[0] = True  # The first box is unlocked
 
-    # If all boxes have been visited, return True, otherwise return False
-    return len(visited) == len(boxes)
+    keys = [0]  # Start with the keys in the first box
 
-# Test cases
-boxes1 = [[1], [2], [3], [4], []]
-print(canUnlockAll(boxes1))  # Output: True
+    while keys:
+        box_index = keys.pop()  # Get the box index from the keys list
 
-boxes2 = [[1, 4, 6], [2], [0, 4, 1], [5, 6, 2], [3], [4, 1], [6]]
-print(canUnlockAll(boxes2))  # Output: True
+        for key in boxes[box_index]:
+            if 0 <= key < len(boxes) and not unlocked[key]:
+                unlocked[key] = True  # Mark the box as unlocked
+                keys.append(key)  # Add keys found in the box to the keys list
 
-boxes3 = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
-print(canUnlockAll(boxes3))  # Output: False
+    return all(unlocked)
