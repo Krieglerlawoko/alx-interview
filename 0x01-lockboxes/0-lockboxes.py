@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """ canunlock all function"""
 
+
 def canUnlockAll(boxes):
     """
     Determine if all boxes can be opened.
 
     Args:
-        boxes (list of list of int): A list of lists representing boxes and their corresponding keys.
+        boxes: A list of lists representing boxes.
 
     Returns:
         bool: True if all boxes can be opened, False otherwise.
