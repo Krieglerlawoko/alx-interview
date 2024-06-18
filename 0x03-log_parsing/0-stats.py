@@ -25,7 +25,7 @@ log_pattern = re.compile(
 
 
 def print_stats():
-    """Print the current statistics"""
+    """Print the current statistics."""
     print("File size: {}".format(total_file_size))
     for code in sorted(status_code_counts.keys()):
         if status_code_counts[code] > 0:
@@ -33,7 +33,7 @@ def print_stats():
 
 
 def signal_handler(sig, frame):
-    """Handle keyboard interruption"""
+    """Handle keyboard interruption."""
     print_stats()
     sys.exit(0)
 
@@ -61,6 +61,9 @@ try:
             line_count += 1
             if line_count % 10 == 0:
                 print_stats()
+except KeyboardInterrupt:
+    print_stats()
+    raise
 finally:
     # Ensure stats are printed at the end
     print_stats()
