@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """Module for calculating the perimeter of an island in a grid.
-
-This module defines a function to compute the perimeter of an island 
-represented in a 2D grid. The grid is composed of 1s (land) and 0s (water). 
+This module defines a function to compute the perimeter of an island
+represented in a 2D grid. The grid is composed of 1s (land) and 0s (water).
 The island is surrounded by water, and there are no lakes within the island.
 """
 
@@ -11,8 +10,8 @@ def island_perimeter(grid):
     """Calculate the perimeter of the island in a grid.
 
     Args:
-        grid (List[List[int]]): A 2D list where 1 represents land and 0 represents water.
-
+        grid (List[List[int]]): A 2D list where 1 represents land
+        and 0 represents water.
     Returns:
         int: The perimeter of the island.
     """
