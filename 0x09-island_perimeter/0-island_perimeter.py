@@ -1,17 +1,25 @@
 #!/usr/bin/python3
-def island_perimeter(grid):
-    """
-    Calculate the perimeter of an island described in a grid.
-    
-    grid: A list of lists of integers where:
-        0 represents water
-        1 represents land
-    
-    Returns the perimeter of the island.
+"""Module for calculating the perimeter of an island in a grid.
+
+This module defines a function to compute the perimeter of an island 
+represented in a 2D grid. The grid is composed of 1s (land) and 0s (water). 
+The island is surrounded by water, and there are no lakes within the island.
+"""
+
+from typing import List
+
+def island_perimeter(grid: List[List[int]]) -> int:
+    """Calculate the perimeter of the island in a grid.
+
+    Args:
+        grid (List[List[int]]): A 2D list where 1 represents land and 0 represents water.
+
+    Returns:
+        int: The perimeter of the island.
     """
     if not grid or not grid[0]:
         return 0
-    
+
     rows = len(grid)
     cols = len(grid[0])
     perimeter = 0
@@ -19,25 +27,10 @@ def island_perimeter(grid):
     for i in range(rows):
         for j in range(cols):
             if grid[i][j] == 1:
-                # Start with a perimeter of 4 for each land cell
-                cell_perimeter = 4
-                
-                # Check the top cell
-                if i > 0 and grid[i - 1][j] == 1:
-                    cell_perimeter -= 1
-                
-                # Check the bottom cell
-                if i < rows - 1 and grid[i + 1][j] == 1:
-                    cell_perimeter -= 1
-                
-                # Check the left cell
-                if j > 0 and grid[i][j - 1] == 1:
-                    cell_perimeter -= 1
-                
-                # Check the right cell
-                if j < cols - 1 and grid[i][j + 1] == 1:
-                    cell_perimeter -= 1
-                
-                perimeter += cell_perimeter
-    
+                # Add to perimeter for each edge that is either on the boundary or adjacent to water
+                perimeter += (i == 0 or grid[i - 1][j] == 0)  # Top edge
+                perimeter += (i == rows - 1 or grid[i + 1][j] == 0)  # Bottom edge
+                perimeter += (j == 0 or grid[i][j - 1] == 0)  # Left edge
+                perimeter += (j == cols - 1 or grid[i][j + 1] == 0)  # Right edge
+
     return perimeter
