@@ -6,9 +6,8 @@ represented in a 2D grid. The grid is composed of 1s (land) and 0s (water).
 The island is surrounded by water, and there are no lakes within the island.
 """
 
-from typing import List
 
-def island_perimeter(grid: List[List[int]]) -> int:
+def island_perimeter(grid):
     """Calculate the perimeter of the island in a grid.
 
     Args:
@@ -17,20 +16,29 @@ def island_perimeter(grid: List[List[int]]) -> int:
     Returns:
         int: The perimeter of the island.
     """
-    if not grid or not grid[0]:
-        return 0
-
+    # Determine the number of rows and columns in the grid
     rows = len(grid)
     cols = len(grid[0])
+
+    # Initialize the perimeter variable to 0
     perimeter = 0
 
+    # Loop through each cell in the grid
     for i in range(rows):
         for j in range(cols):
             if grid[i][j] == 1:
-                # Add to perimeter for each edge that is either on the boundary or adjacent to water
-                perimeter += (i == 0 or grid[i - 1][j] == 0)  # Top edge
-                perimeter += (i == rows - 1 or grid[i + 1][j] == 0)  # Bottom edge
-                perimeter += (j == 0 or grid[i][j - 1] == 0)  # Left edge
-                perimeter += (j == cols - 1 or grid[i][j + 1] == 0)  # Right edge
+                # Check the top edge
+                if i == 0 or grid[i-1][j] == 0:
+                    perimeter += 1
+                # Check the bottom edge
+                if i == rows-1 or grid[i+1][j] == 0:
+                    perimeter += 1
+                # Check the left edge
+                if j == 0 or grid[i][j-1] == 0:
+                    perimeter += 1
+                # Check the right edge
+                if j == cols-1 or grid[i][j+1] == 0:
+                    perimeter += 1
 
+    # Return the total perimeter
     return perimeter
