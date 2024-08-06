@@ -3,6 +3,7 @@
 Prime game module.
 """
 
+
 def is_winner(x, nums):
     """
     Determines the winner of a prime game session with `x` rounds.
@@ -12,7 +13,8 @@ def is_winner(x, nums):
     nums (list): A list of integers representing the end number for each round.
 
     Returns:
-    str: The winner of the game, either "Maria" or "Ben". Returns None if it's a tie.
+    str: The winner of the game, either
+    "Maria" or "Ben". Returns None if it's a tie.
     """
     if x < 1 or not nums:
         return None
@@ -29,7 +31,7 @@ def is_winner(x, nums):
             for j in range(i * i, n + 1, i):
                 primes[j] = False
 
-    # Filter the number of primes less than or equal to n in nums for each round
+    # Filter the number of primes less than or equal
     for num in nums:
         primes_count = sum(primes[0:num + 1])
         bens_wins += primes_count % 2 == 0
