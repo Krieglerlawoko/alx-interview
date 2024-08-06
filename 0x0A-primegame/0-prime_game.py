@@ -4,7 +4,7 @@ Module defining the is_winner function for the prime game.
 """
 
 
-def isWinner(x, nums):
+def is_winner(x, nums):
     """
     Determines the winner of the prime game.
 
@@ -24,55 +24,44 @@ def isWinner(x, nums):
         primes_set = primes_in_range(1, num)
 
         if not primes_set:
-            benWinsCount += 1
+            ben_wins_count += 1
             continue
 
-        isMariaTurns = True
+        is_maria_turn = True
 
-        while(True):
+        while True:
             if not primes_set:
-                if isMariaTurns:
-                    benWinsCount += 1
+                if is_maria_turn:
+                    ben_wins_count += 1
                 else:
-                    mariaWinsCount += 1
+                    maria_wins_count += 1
                 break
 
-            smallestPrime = primes_set.pop(0)
-            roundsSet.remove(smallestPrime)
+            smallest_prime = primes_set.pop(0)
+            rounds_set = [x for x in rounds_set if x % smallest_prime != 0]
+            is_maria_turn = not is_maria_turn
 
-            roundsSet = [x for x in roundsSet if x % smallestPrime != 0]
-
-            isMariaTurns = not isMariaTurns
-
-    if mariaWinsCount > benWinsCount:
+    if maria_wins_count > ben_wins_count:
         return "Winner: Maria"
-
-    if mariaWinsCount < benWinsCount:
+    elif ben_wins_count > maria_wins_count:
         return "Winner: Ben"
-
-    return None
+    else:
+        return None
 
 
 def is_prime(n):
-    """Returns True if n is prime, else False."""
+    """
+    Checks if a number is prime.
+
+    Parameters:
+    n (int): The number to check.
+
+    Returns:
+    bool: True if the number is prime, False otherwise.
+    """
     if n < 2:
         return False
     for i in range(2, int(n ** 0.5) + 1):
         if n % i == 0:
             return False
-    return True
-
-
-def primes_in_range(start, end):
-    """
-    Generates a list of prime numbers in a given range.
-
-    Parameters:
-    start (int): The start of the range.
-    end (int): The end of the range.
-
-    Returns:
-    list: A list of prime numbers within the range.
-    """
-    primes = [n for n in range(start, end+1) if is_prime(n)]
-    return primes
+    return
