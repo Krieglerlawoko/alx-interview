@@ -15,7 +15,7 @@ def isWinner(x, nums):
     for i, is_prime in enumerate(primes, 1):
         if i == 1 or not is_prime:
             continue
-        for j in range(i + i, n + 1, i):
+        for j in range(i + i, a + 1, i):
             primes[j - 1] = False
     # filter the number of primes less than n in nums for each round
     for _, a in zip(range(x), nums):
@@ -24,4 +24,4 @@ def isWinner(x, nums):
         mariaswins += primes_count % 2 == 1
     if mariaswins == benswins:
         return None
-    return 'Maria' if marias_wins > bens_wins else 'Ben'
+    return 'Maria' if mariaswins > benswins else 'Ben'
