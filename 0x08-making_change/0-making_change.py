@@ -1,20 +1,32 @@
 #!/usr/bin/python3
 """
-Rotate 2D Matrix
+Determine the minimum number of coins to make a given amount
 """
 
 
-def rotate_2d_matrix(matrix):
+def makeChange(coins, total):
     """
-    Rotates an n x n 2D matrix 90 degrees clockwise.
+    Determine the fewest number of coins needed to meet a given total amount.
+
+    Args:
+        coins (list): List of integers representing coin denominations.
+        total (int): Target amount.
+
+    Returns:
+        int: Minimum number of coins needed, or -1 if total cannot be met.
     """
-    n = len(matrix)
+    if total <= 0:
+        return 0
 
-    # Transpose the matrix
-    for i in range(n):
-        for j in range(i + 1, n):
-            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+    # Initialize dp array where dp[x] is the minimum coins needed for amount x
+    dp = [float('inf')] * (total + 1)
+    dp[0] = 0  # Base case: 0 coins are needed for total 0
 
-    # Reverse each row
-    for i in range(n):
-        matrix[i].reverse()
+    # Populate dp array
+    for amount in range(1, total + 1):
+        for coin in coins:
+            if coin <= amount:
+                dp[amount] = min(dp[amount], dp[amount - coin] + 1)
+
+    # If dp[total] is still infinity, it means total cannot be met
+    return dp[total] if dp[total] != float('inf') else -1
